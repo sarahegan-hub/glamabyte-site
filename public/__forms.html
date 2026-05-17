@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Glamabyte forms</title>
+  </head>
+  <body>
+    <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="newsletter" />
+      <input name="bot-field" />
+      <input name="first-name" />
+      <input name="email" type="email" />
+      <select name="persona">
+        <option>SME</option>
+        <option>Community Group</option>
+        <option>Organisation</option>
+        <option>Just me</option>
+        <option>Other</option>
+      </select>
+    </form>
+    <form name="connect" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="connect" />
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" type="email" />
+      <input name="organisation" />
+      <textarea name="message"></textarea>
+      <input name="referral" />
+    </form>
+    <form name="speaking-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="speaking-enquiry" />
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="organisation" />
+      <input name="email" type="email" />
+      <textarea name="how-can-we-help"></textarea>
+    </form>
+  </body>
+</html>
