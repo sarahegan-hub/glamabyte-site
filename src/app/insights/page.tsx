@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { NewsletterForm } from "@/components/site/Forms";
 import { PageHero, Section, SectionHeading } from "@/components/site/Section";
 import { getInsightPosts } from "@/lib/insights";
@@ -26,19 +27,31 @@ export default function InsightsPage() {
         {posts.length > 0 ? (
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {posts.map((post) => (
-              <article key={post.slug} className="card p-6">
-                <p className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-pink">
-                  {post.category} | {formatDisplayDate(post.date)}
-                </p>
-                <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-brilliance">
-                  <a href={`/insights/${post.slug}`} className="hover:text-pink">
-                    {post.title}
-                  </a>
-                </h2>
-                <p className="mt-5 text-sm leading-7 text-brilliance/74">{post.description}</p>
-                <a href={`/insights/${post.slug}`} className="mt-7 inline-block text-sm font-bold uppercase tracking-[0.16em] text-aqua hover:text-pink">
-                  Read insight
+              <article key={post.slug} className="card overflow-hidden">
+                <a href={`/insights/${post.slug}`} className="relative block aspect-[16/10]">
+                  <Image
+                    src={post.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent" />
                 </a>
+                <div className="p-6">
+                  <p className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-pink">
+                    {post.category} | {formatDisplayDate(post.date)}
+                  </p>
+                  <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-brilliance">
+                    <a href={`/insights/${post.slug}`} className="hover:text-pink">
+                      {post.title}
+                    </a>
+                  </h2>
+                  <p className="mt-5 text-sm leading-7 text-brilliance/74">{post.description}</p>
+                  <a href={`/insights/${post.slug}`} className="mt-7 inline-block text-sm font-bold uppercase tracking-[0.16em] text-aqua hover:text-pink">
+                    Read insight
+                  </a>
+                </div>
               </article>
             ))}
           </div>

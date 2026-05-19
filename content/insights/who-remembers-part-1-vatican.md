@@ -3,7 +3,7 @@ title: "Who Remembers: The patterns we lived through and are about to repeat. Pa
 description: "Pope Leo XIV is launching a Vatican commission on artificial intelligence. The focus is not on slowing technology down. The focus is on understanding what AI does to people. That distinction matters more than most people will realise."
 date: "2026-05-19"
 category: "Who Remembers"
-image: "/assets/who remembers.png"
+image: "/assets/who-remembers.png"
 ---
 
 Pope Leo XIV is launching a Vatican commission on artificial intelligence.
