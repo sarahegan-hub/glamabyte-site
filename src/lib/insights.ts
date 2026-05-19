@@ -90,10 +90,11 @@ export function markdownToHtml(markdown: string): string {
 }
 
 function parsePost(fileName: string, source: string): InsightPost {
-  const slug = fileName.replace(/\.md$/, "");
+  const fileSlug = fileName.replace(/\.md$/, "");
   const frontMatterMatch = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   const frontMatter = frontMatterMatch ? parseFrontMatter(frontMatterMatch[1]) : {};
   const content = frontMatterMatch ? frontMatterMatch[2].trim() : source.trim();
+  const slug = frontMatter.slug ?? slugify(fileSlug);
 
   return {
     slug,
@@ -130,6 +131,14 @@ function titleFromSlug(slug: string) {
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
+}
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/\s+\(\d+\)$/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 function escapeHtml(value: string) {
