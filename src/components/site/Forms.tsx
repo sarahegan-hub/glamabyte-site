@@ -21,6 +21,7 @@ export function NewsletterForm({ compact = false }: NewsletterFormProps) {
       <form
         name="newsletter"
         method="POST"
+        action="/__forms.html"
         data-netlify="true"
         netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
@@ -52,6 +53,7 @@ export function ConnectForm() {
       <form
         name="connect"
         method="POST"
+        action="/__forms.html"
         data-netlify="true"
         netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
@@ -87,6 +89,7 @@ export function SpeakingForm() {
       <form
         name="speaking-enquiry"
         method="POST"
+        action="/__forms.html"
         data-netlify="true"
         netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
@@ -126,7 +129,7 @@ function useNetlifyForm() {
     setStatus("sending");
 
     try {
-      const response = await fetch("/", {
+      const response = await fetch(form.action, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
