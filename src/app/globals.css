@@ -123,4 +123,64 @@ a {
     background-size: contain;
     filter: drop-shadow(0 0 8px rgba(217, 46, 133, 0.8));
   }
+
+  .article-content h2 {
+    @apply mt-12 font-display text-4xl font-black leading-tight text-brilliance;
+  }
+
+  .article-content h3 {
+    @apply mt-10 font-display text-3xl font-bold leading-tight text-brilliance;
+  }
+
+  .article-content p,
+  .article-content li,
+  .article-content blockquote {
+    @apply text-lg leading-9 text-[rgba(240,235,227,0.78)];
+  }
+
+  .article-content p {
+    @apply mt-6;
+  }
+
+  .article-content ul {
+    @apply mt-6 grid gap-4;
+  }
+
+  .article-content li {
+    @apply relative pl-8;
+  }
+
+  .article-content li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7rem;
+    width: 1rem;
+    height: 1rem;
+    background-image: url("/assets/diamond-bullet.webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: drop-shadow(0 0 8px rgba(217, 46, 133, 0.8));
+  }
+
+  .article-content blockquote {
+    @apply mt-8 border-l-4 border-pink bg-brilliance/[0.035] py-5 pl-6 font-display text-2xl text-brilliance;
+  }
+
+  .article-content strong {
+    @apply text-brilliance;
+  }
+
+  .article-content em {
+    @apply text-aqua;
+  }
+
+  .article-content code {
+    @apply border border-pink/25 bg-obsidian px-2 py-1 font-sans text-sm text-aqua;
+  }
+
+  .article-content a {
+    @apply text-aqua underline decoration-pink/60 underline-offset-4 hover:text-pink;
+  }
 }
