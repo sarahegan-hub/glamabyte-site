@@ -5,6 +5,7 @@ import { personaOptions } from "@/lib/site-content";
 
 type NewsletterFormProps = {
   compact?: boolean;
+  buttonLabel?: string;
 };
 
 const inputClass =
@@ -13,7 +14,7 @@ const inputClass =
 const labelClass =
   "mb-2 block font-sans text-xs font-bold uppercase tracking-[0.16em] text-brilliance/70";
 
-export function NewsletterForm({ compact = false }: NewsletterFormProps) {
+export function NewsletterForm({ compact = false, buttonLabel = "Subscribe" }: NewsletterFormProps) {
   const { status, handleSubmit } = useNetlifyForm();
 
   return (
@@ -37,7 +38,7 @@ export function NewsletterForm({ compact = false }: NewsletterFormProps) {
         <FormField label="Email" name="email" type="email" required />
         <SelectField label="I am a..." name="persona" options={personaOptions} required />
         <button type="submit" className="btn-primary md:self-end">
-          Subscribe
+          {buttonLabel}
         </button>
       </form>
       <FormStatus status={status} />
@@ -118,6 +119,73 @@ export function SpeakingForm() {
   );
 }
 
+export function DebateForm() {
+  const { status, handleSubmit } = useNetlifyForm();
+
+  return (
+    <>
+      <form
+        name="great-aussie-ai-ethics-debate"
+        method="POST"
+        action="/__forms.html"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        onSubmit={handleSubmit}
+        className="grid gap-7"
+      >
+        <input type="hidden" name="form-name" value="great-aussie-ai-ethics-debate" />
+        <p className="hidden">
+          <label>
+            Do not fill this out: <input name="bot-field" />
+          </label>
+        </p>
+        <RadioGroup
+          legend="Is technology improving or ruining elite sport?"
+          name="vote"
+          options={["It's making it better.", "It's ruining it."]}
+          required
+        />
+        <TextAreaField
+          label="Tell us why."
+          name="comment"
+        />
+        <p className="-mt-4 text-sm italic leading-7 text-brilliance/68">
+          *Your quotes may be used anonymously.
+        </p>
+        <FormField label="Email" name="email" type="email" />
+        <p className="text-sm leading-7 text-brilliance/68">
+          We collect your vote, optional comment and optional email so Glamabyte can analyse the
+          debate, publish a public summary and send you the verdict if you opt in. Your quotes may
+          be used anonymously. We will not publish your email. If you provide your email, you may
+          receive promotional emails from Glamabyte and/or Boardrooms to Backyards™. You can
+          unsubscribe at any time. See our{" "}
+          <a
+            href="https://glamabyte.com.au/privacy-policy"
+            className="text-aqua underline decoration-pink/60 underline-offset-4 hover:text-pink"
+          >
+            Privacy Policy
+          </a>
+          .
+        </p>
+        <button type="submit" className="btn-primary w-fit">
+          Submit vote
+        </button>
+      </form>
+      {status === "sent" ? (
+        <div className="mt-6 border border-aqua/35 bg-aqua/10 p-5 text-brilliance">
+          <p className="font-display text-2xl font-bold">Your vote is in.</p>
+          <p className="mt-3 leading-8 text-brilliance/78">
+            The verdict lands in the first Boardrooms to Backyards™ newsletter on Monday 29 June.
+            Subscribe for the verdict so you do not miss it.
+          </p>
+        </div>
+      ) : (
+        <FormStatus status={status} />
+      )}
+    </>
+  );
+}
+
 function useNetlifyForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
@@ -147,6 +215,41 @@ function useNetlifyForm() {
   }
 
   return { status, handleSubmit };
+}
+
+function RadioGroup({
+  legend,
+  name,
+  options,
+  required = false,
+}: {
+  legend: string;
+  name: string;
+  options: string[];
+  required?: boolean;
+}) {
+  return (
+    <fieldset className="grid gap-3">
+      <legend className={labelClass}>{legend}</legend>
+      <div className="grid gap-3">
+        {options.map((option) => (
+          <label
+            key={option}
+            className="flex gap-3 border border-brilliance/15 bg-obsidian/80 p-4 text-sm leading-6 text-brilliance/82 transition focus-within:border-pink focus-within:ring-2 focus-within:ring-pink/30"
+          >
+            <input
+              className="mt-1 h-4 w-4 accent-pink"
+              type="radio"
+              name={name}
+              value={option}
+              required={required}
+            />
+            <span>{option}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
 }
 
 function FormStatus({ status }: { status: "idle" | "sending" | "sent" | "error" }) {
