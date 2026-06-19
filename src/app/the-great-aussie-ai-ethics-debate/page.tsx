@@ -187,7 +187,7 @@ export default function EthicsDebatePage() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.78fr_1fr] lg:items-center">
           <div className="relative aspect-square max-w-xl overflow-hidden border border-pink/25 bg-[radial-gradient(circle_at_50%_45%,rgba(217,46,133,0.24),transparent_18rem)]">
             <Image
-              src="/assets/glitch-phone.webp"
+              src="/assets/ethics-debate/The Great AI Ethics Debate Logo (2).png"
               alt="Glitch Glamabyte™, the host of The Great Aussie AI Ethics Debate™."
               fill
               sizes="(min-width: 1024px) 40vw, 100vw"
